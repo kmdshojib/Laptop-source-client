@@ -30,7 +30,7 @@ const Header = () => {
                 <div className="navbar-end mr-5">
                 <div className="hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
-                    {
+                            {
                                 (user  && user?.uid) ? 
                                     <li><p onClick={handleLogOut}>Log Out</p></li>
                                 :

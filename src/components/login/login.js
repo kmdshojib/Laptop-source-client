@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/authcontext';
+import useTitle from '../../Hooks/useTitle';
 
 const Login = () => {
+    useTitle("Sign In")
     const {register,handleSubmit,formState: { errors }} = useForm();
     const {signIn} = useContext(AuthContext)
     const handleLogin = (data) =>{
