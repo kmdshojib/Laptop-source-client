@@ -7,41 +7,51 @@ import useTitle from './../../Hooks/useTitle';
 const Register = () => {
     useTitle("Register")
     const { register, handleSubmit } = useForm()
-    const {signUp} = useContext(AuthContext)
+    const { signUp, updateUserProfile } = useContext(AuthContext)
     const handleRegister = (data) => {
         const email = data.email
         const password = data.password
-        const name = data.username
+        const displayName = data.username
         const role = data.role
 
-        const user ={
+        const user = {
             email: email,
             password: password,
-            name: name,
+            name: displayName,
             role: role
         }
         // signup
 
         signUp(email, password)
-        .then(data => {
-            (data?.user && data?.user?.uid) &&
-            // sending user to database
-        
-            fetch("http://localhost:5000/users",{
-                headers:{
-                    'Content-Type': 'application/json'
-                },
-                method: 'POST',
-                body: JSON.stringify(user)
+            .then(data => {
+                (data?.user && data?.user?.uid) &&
+                    // sending user to database
+
+                    fetch("http://localhost:5000/users", {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        method: 'POST',
+                        body: JSON.stringify(user)
+                    })
+                        .then(res => res.json())
+                        .then(data => console.log(data))
+                        .catch(err => console.error(err))
+
+                handleUserProflile(displayName)
             })
-            .then(res => res.json())
-            .then(data => console.log(data))
+
             .catch(err => console.error(err))
-            })
 
-        .catch(err => console.error(err))
-
+        // update a user
+        const handleUserProflile = (name) => {
+            const profile = { displayName: name }
+            updateUserProfile(profile)
+                .then(data => console.log(data))
+                .catch(err => console.log(err))
+        }
     }
+
 
     return (
         <div className="flex justify-center mt-10 mb-10">

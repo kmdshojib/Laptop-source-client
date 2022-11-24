@@ -6,16 +6,16 @@ import useTitle from '../../Hooks/useTitle';
 
 const Login = () => {
     useTitle("Sign In")
-    const {register,handleSubmit,formState: { errors }} = useForm();
-    const {signIn} = useContext(AuthContext)
-    const handleLogin = (data) =>{
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { signIn } = useContext(AuthContext)
+    const handleLogin = (data) => {
         const email = data.email
         const password = data.password
         signIn(email, password)
-        .then(result =>{
-            (result?.user && result.user?.uid) && alert("User logged in successfully")
-        })
-        .catch(error => console.log(error))
+            .then(result => {
+                (result?.user && result.user?.uid) && alert("User logged in successfully")
+            })
+            .catch(error => console.log(error))
     }
 
     return (
@@ -23,14 +23,14 @@ const Login = () => {
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl shadow-lg">
                 <h1 className="text-2xl font-bold text-center">Login</h1>
                 <form onSubmit={handleSubmit(handleLogin)} action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
-                <div className="space-y-1 text-sm">
+                    <div className="space-y-1 text-sm">
                         <label htmlFor="email" className="block ">Email</label>
                         <input type="email" {...register("email", { required: true })} name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md input  input-bordered" />
                         {errors.email && <p className="text-red-500 text-xs">Check your Email!</p>}
                     </div>
                     <div className="space-y-1 text-sm">
                         <label htmlFor="password" className="block ">Password</label>
-                        <input type="password" {...register("password",{ required: true })} name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                        <input type="password" {...register("password", { required: true })} name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md input input-bordered" />
                         {errors.password && <p className="text-red-500 text-xs">Check your Password!</p>}
                     </div>
                     <button className="block p-3 text-center rounded btn btn-primary w-full">Sign in</button>
@@ -48,7 +48,7 @@ const Login = () => {
                     </button>
                 </div>
                 <p className="text-xs text-center sm:px-6 ">Don't have an account?
-                    <Link to="/register" rel="noopener noreferrer"  className="underline " data-abc="true">Sign up</Link>
+                    <Link to="/register" rel="noopener noreferrer" className="underline " data-abc="true">Sign up</Link>
                 </p>
             </div>
         </div>

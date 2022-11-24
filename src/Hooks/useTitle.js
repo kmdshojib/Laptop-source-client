@@ -5,5 +5,5 @@ const useTitle = title => {
         document.title = title;
     }, [title]);
 }
- 
+
 export default useTitle;
