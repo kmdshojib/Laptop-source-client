@@ -1,12 +1,46 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from './../../context/authcontext';
 
 const Register = () => {
     const { register, handleSubmit } = useForm()
+    const {signUp} = useContext(AuthContext)
     const handleRegister = (data) => {
-        console.log(data)
+        const email = data.email
+        const password = data.password
+        const name = data.username
+        const role = data.role
+
+        const user ={
+            email: email,
+            password: password,
+            name: name,
+            role: role
+        }
+        // signup
+
+        signUp(email, password)
+        .then(data => {
+            (data?.user && data?.user?.uid) &&
+            // sending user to database
+        
+            fetch("http://localhost:5000/users",{
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(user)
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.error(err))
+            })
+
+        .catch(err => console.error(err))
+
     }
+
     return (
         <div className="flex justify-center mt-10 mb-10">
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl shadow-lg">
@@ -14,10 +48,10 @@ const Register = () => {
                 <form onSubmit={handleSubmit(handleRegister)} action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
                         <label htmlFor="username" className="block ">Username</label>
-                        <input type="text" {...register("username")} name="username" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md input  input-bordered" />
+                        <input type="text" {...register("username")} name="username" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md input input-bordered" />
                     </div>
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="username" className="block ">Email</label>
+                        <label htmlFor="email" className="block ">Email</label>
                         <input type="email" {...register("email")} name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md input  input-bordered" />
                     </div>
                     <div className="space-y-1 text-sm">
