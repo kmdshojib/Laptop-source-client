@@ -6,7 +6,7 @@ import useTitle from './../../Hooks/useTitle';
 
 const Register = () => {
     useTitle("Register")
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, reset } = useForm()
     const { signUp, updateUserProfile } = useContext(AuthContext)
     const handleRegister = (data) => {
         const email = data.email
@@ -16,7 +16,6 @@ const Register = () => {
 
         const user = {
             email: email,
-            password: password,
             name: displayName,
             role: role
         }
@@ -26,7 +25,6 @@ const Register = () => {
             .then(data => {
                 (data?.user && data?.user?.uid) &&
                     // sending user to database
-
                     fetch("http://localhost:5000/users", {
                         headers: {
                             'Content-Type': 'application/json'
@@ -39,6 +37,7 @@ const Register = () => {
                         .catch(err => console.error(err))
 
                 handleUserProflile(displayName)
+                reset()
             })
 
             .catch(err => console.error(err))
@@ -71,6 +70,7 @@ const Register = () => {
                         <select {...register("role")} className="select select-bordered w-full" name='role'>
                             <option value="buyer">Buyer</option>
                             <option value="seller">Seller</option>
+                            <option value="admin">ad</option>
                         </select>
                     </div>
                     <div className="space-y-1 text-sm">

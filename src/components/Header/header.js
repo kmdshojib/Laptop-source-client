@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/authcontext';
+import useAdmin from './../../Hooks/useAdmin';
+
 const Header = () => {
-    const  {user,logOut} = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
+    const [isAdmin] = useAdmin(user?.email)
     const handleLogOut = () => logOut()
     return (
         <div>
@@ -14,33 +17,36 @@ const Header = () => {
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             {
-                                (user  && user?.uid) ? 
+                                (user && user?.uid) ?
                                     <li><p onClick={handleLogOut}>Log Out</p></li>
-                                :
-                                <>
-                                    <li><Link to="/login">Sign In</Link></li>
-                                    <li><Link to="/register">Register</Link></li>
-                                </>
+                                    :
+                                    <>
+                                        <li><Link to="/login">Sign In</Link></li>
+                                        <li><Link to="/register">Register</Link></li>
+                                    </>
                             }
+                            {isAdmin && <li><Link to="/admindashboard">Dashboard</Link></li>}
                         </ul>
                     </div>
                     <Link to="/" className="btn btn-ghost normal-case text-xl">Laptop Source</Link>
                 </div>
-                
+
                 <div className="navbar-end mr-5">
-                <div className="hidden lg:flex">
-                    <ul className="menu menu-horizontal p-0">
+                    <div className="hidden lg:flex">
+                        <ul className="menu menu-horizontal p-0">
                             {
-                                (user  && user?.uid) ? 
+                                (user && user?.uid) ?
                                     <li><p onClick={handleLogOut}>Log Out</p></li>
-                                :
-                                <>
-                                    <li><Link to="/login">Sign In</Link></li>
-                                    <li><Link to="/register">Register</Link></li>
-                                </>
+                                    :
+                                    <>
+                                        <li><Link to="/login">Sign In</Link></li>
+                                        <li><Link to="/register">Register</Link></li>
+                                    </>
                             }
-                    </ul>
-                </div>
+                            {isAdmin && <li><Link to="/admindashboard">Dashboard</Link></li>}
+                        </ul>
+
+                    </div>
                 </div>
             </div>
         </div>
