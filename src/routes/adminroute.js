@@ -10,7 +10,7 @@ const AdminRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext)
     const [isAdmin,isAdminLoading] = useAdmin(user?.email)
     const location = useLocation()
-    if (loading || isAdminLoading) {
+    if ( isAdminLoading && !loading) {
         return <Spinner />
     }
     if (user && isAdmin) {
