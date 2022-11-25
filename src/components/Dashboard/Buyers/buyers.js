@@ -1,8 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import useTitle from '../../../Hooks/useTitle';
 import Spinner from '../../Spinner/Spinner';
 
 const AllBuyers = () => {
+    useTitle("Dashboard | All Buyers");
     const { isLoading, error, data } = useQuery({
         queryKey: ["buyers"],
         queryFn: () => fetch("http://localhost:5000/users/buyers")

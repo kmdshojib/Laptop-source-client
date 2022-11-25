@@ -55,7 +55,7 @@ const Register = () => {
     return (
         <div className="flex justify-center mt-10 mb-10">
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl shadow-lg">
-                <h1 className="text-2xl font-bold text-center">Login</h1>
+                <h1 className="text-2xl font-bold text-center">Register</h1>
                 <form onSubmit={handleSubmit(handleRegister)} action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
                         <label htmlFor="username" className="block ">Username</label>
@@ -66,11 +66,10 @@ const Register = () => {
                         <input type="email" {...register("email")} name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md input  input-bordered" />
                     </div>
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="role" className="block ">Select Accout Type</label>
+                        <label htmlFor="role" className="block ">Select Account Type</label>
                         <select {...register("role")} className="select select-bordered w-full" name='role'>
-                            <option value="buyer">Buyer</option>
+                            <option defaultValue value="buyer">Buyer</option>
                             <option value="seller">Seller</option>
-                            <option value="admin">ad</option>
                         </select>
                     </div>
                     <div className="space-y-1 text-sm">
@@ -96,7 +95,6 @@ const Register = () => {
                     <Link to="/login" rel="noopener noreferrer" className="underline " data-abc="true">Sign In</Link>
                 </p>
             </div>
-
         </div>
     );
 }

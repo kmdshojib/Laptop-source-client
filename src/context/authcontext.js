@@ -43,6 +43,7 @@ const UserContext = ({ children }) => {
         return () => unSubscribe
     })
 
+   
     const authInfo = { signIn, signUp, logOut, updateUserProfile, user, loading }
     return (
         <AuthContext.Provider value={authInfo}>
