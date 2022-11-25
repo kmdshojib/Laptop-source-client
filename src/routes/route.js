@@ -10,6 +10,7 @@ import Login from "../components/login/login";
 import Register from "../components/register/register";
 import Main from "../layout/main";
 import AdminRoute from "./adminroute";
+import ProductPage from './../components/productpage/ProductPage';
 
 export const router = createBrowserRouter([
     {
@@ -32,6 +33,11 @@ export const router = createBrowserRouter([
                 path:"/blog",
                 element: <Blog />
 
+            },
+            {
+                path:"/laptop/:category",
+                element: <ProductPage />,
+                loader: async ({params}) => fetch(`http://localhost:5000/product/${params.category}`)
             },
             {
                 path: "/addproduct",

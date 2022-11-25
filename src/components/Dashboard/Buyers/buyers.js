@@ -15,18 +15,18 @@ const AllBuyers = () => {
     if (isLoading) return <Spinner />
     if (error) return <p>Something went wrong!</p>
 
-    const handleDelete = (id) =>{
+    const handleDelete = (id) => {
         console.log(id)
         const confirm = window.confirm("Are you sure you want to delete")
-        if(confirm){
-            fetch(`http://localhost:5000/user/${id}`,{
-            method: "DELETE",
-        })
-           .then(res => res.json())
-           .then(data => {
-                data.acknowledged && toast.warning("User deleted successfully!")
-                refetch()
-           })
+        if (confirm) {
+            fetch(`http://localhost:5000/user/${id}`, {
+                method: "DELETE",
+            })
+                .then(res => res.json())
+                .then(data => {
+                    data.acknowledged && toast.warning("User deleted successfully!")
+                    refetch()
+                })
         }
     }
     return (
