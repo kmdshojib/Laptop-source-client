@@ -9,7 +9,9 @@ import useAdmin from '../Hooks/useAdmin';
 const AdminRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext)
     const [isAdmin,isAdminLoading] = useAdmin(user?.email)
+    
     const location = useLocation()
+
     if ( isAdminLoading && !loading) {
         return <Spinner />
     }

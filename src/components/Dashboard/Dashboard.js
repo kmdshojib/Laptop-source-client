@@ -1,9 +1,14 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
+import DashboardNavigation from './dashboardNavigation';
 
 
 const DashBoard = () => {
     return (
-        <div>This is DashBoard</div>
+        <div className="flex flex-col lg:flex-row">
+            <DashboardNavigation />
+            <Outlet />
+        </div>
     );
 }
 
