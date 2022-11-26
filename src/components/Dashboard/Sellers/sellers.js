@@ -3,8 +3,9 @@ import { useQuery } from 'react-query';
 import Spinner from '../../Spinner/Spinner';
 import useTitle from './../../../Hooks/useTitle';
 
-import {GoVerified} from "react-icons/go"
+import { GoVerified } from "react-icons/go"
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const AllSellers = () => {
     useTitle("Dashboard | All Sellers");
@@ -17,40 +18,46 @@ const AllSellers = () => {
     if (isLoading) return <Spinner />
     if (error) return <p>Something went wrong!</p>
 
-    const handleDelete = (id) =>{
-        console.log(id)
+    const handleDelete = (email) => {
+        console.log(email)
         const confirm = window.confirm("Are you sure you want to delete")
-        if(confirm){
-            fetch(`http://localhost:5000/user/${id}`,{
-            method: "DELETE",
-        })
-           .then(res => res.json())
-           .then(data => {
-                data.acknowledged && toast.warning("User deleted successfully!")
-                refetch()
-           })
+        if (confirm) {
+            fetch(`http://localhost:5000/user/${email}`, {
+                method: "DELETE",
+            })
+                .then(res => res.json())
+                .then(data => {
+                    data.acknowledged && toast.warning("User deleted successfully!")
+                    refetch()
+                })
         }
     }
 
-    const handleVerify = (id) =>{
+    const handleVerify = (email) => {
         const confirm = window.confirm("Are you sure you want to verify this seller!")
         const verify = {
             "verified": true,
         }
-        if(confirm){
-            fetch(`http://localhost:5000/user/${id}`,{
+        if (confirm) {
+            fetch(`http://localhost:5000/user/${email}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(verify)
             })
-            .then(res => res.json())
-            .then(data => {
-                data?.acknowledged && toast.success("Seller Verified successfully")
-                refetch()
-            })
+                .then(res => res.json())
+                .then(data => {
+                    data?.acknowledged && toast.success("Seller Verified successfully")
+                    refetch()
+                })
         }
+
+        axios({
+            method: 'put',
+            url: `http://localhost:5000/verifcation/${email}`,
+            data: verify
+        })
     }
 
     return (
@@ -70,10 +77,10 @@ const AllSellers = () => {
                         {
                             data.map(buyer => (
                                 <tr key={buyer._id}>
-                                    <td className="flex">{buyer.name} <span className="mt-1 ml-1">{ buyer?.verified && <GoVerified />}</span> </td>
+                                    <td className="flex">{buyer.name} <span className="mt-1 ml-1">{buyer?.verified && <GoVerified />}</span> </td>
                                     <td>{buyer.email}</td>
-                                    <td className="cursor-pointer text-blue-700 hover:underline" onClick={() => handleVerify(buyer._id)}>Verify</td>
-                                    <td className="cursor-pointer text-blue-700 hover:underline" onClick={() => handleDelete(buyer._id)}>Delete</td>
+                                    <td className="cursor-pointer text-blue-700 hover:underline" onClick={() => handleVerify(buyer.email)}>Verify</td>
+                                    <td className="cursor-pointer text-blue-700 hover:underline" onClick={() => handleDelete(buyer.email)}>Delete</td>
                                 </tr>
                             ))
                         }

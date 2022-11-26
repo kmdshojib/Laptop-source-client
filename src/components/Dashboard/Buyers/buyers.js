@@ -15,11 +15,11 @@ const AllBuyers = () => {
     if (isLoading) return <Spinner />
     if (error) return <p>Something went wrong!</p>
 
-    const handleDelete = (id) => {
-        console.log(id)
+    const handleDelete = (email) => {
+        console.log(email)
         const confirm = window.confirm("Are you sure you want to delete")
         if (confirm) {
-            fetch(`http://localhost:5000/user/${id}`, {
+            fetch(`http://localhost:5000/user/${email}`, {
                 method: "DELETE",
             })
                 .then(res => res.json())
@@ -47,7 +47,7 @@ const AllBuyers = () => {
                                 <tr key={buyer._id}>
                                     <td>{buyer.name}</td>
                                     <td>{buyer.email}</td>
-                                    <td className="cursor-pointer text-blue-700 hover:underline" onClick={() => handleDelete(buyer._id)}>Delete</td>
+                                    <td className="cursor-pointer text-blue-700 hover:underline" onClick={() => handleDelete(buyer.email)}>Delete</td>
                                 </tr>
                             ))
                         }
