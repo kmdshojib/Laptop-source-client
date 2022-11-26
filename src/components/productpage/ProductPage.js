@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { GoVerified } from 'react-icons/go';
 
@@ -8,13 +8,34 @@ import { AuthContext } from './../../context/authcontext';
 
 
 
+
 const ProductPage = () => {
     const { user } = useContext(AuthContext)
     const [bookingData, setBookingData] = useState(null)
     const producData = useLoaderData()
-    const { register, handleSubmit } = useForm()
-    const handleBooking = (data) => {
-        console.log(data)
+
+    const handleBooking = (e) => {
+        e.preventDefault()
+        const form = e.target
+        const productName = form.productname.value
+        const productPrice = form.price.value
+        const buyerName = form.username.value
+        const buyerEmail = form.email.value
+        const loaction = form.loaction.value
+        const phone = form.phone.value
+
+        axios({
+            method: 'post',
+            url: 'http://localhost:5000/orders',
+            data:{
+                productName: productName,
+                productPrice:productPrice,
+                buyerName: buyerName,
+                buyerEmail: buyerEmail,
+                loaction: loaction,
+                phone: phone
+            }
+        })
     }
 
 
@@ -59,30 +80,30 @@ const ProductPage = () => {
                 <div className="modal-box">
                     <label htmlFor="my-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <div>
-                        <form onSubmit={handleSubmit(handleBooking)}>
+                        <form onSubmit={handleBooking}>
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="productname" className="block ">Laptop Name</label>
-                                <input type="text" {...register("productname")} name="productname" defaultValue={bookingData?.laptopName} readOnly="readOnly" id="productname" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                                <input type="text" name="productname" defaultValue={bookingData?.laptopName} readOnly="readOnly" id="productname" className="w-full px-4 py-3 rounded-md input input-bordered" />
                             </div>
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="price" className="block ">Price: $</label>
-                                <input type="text" {...register("price")} name="price" defaultValue={bookingData?.resalePrice} readOnly="readOnly" id="price" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                                <input type="text" name="price" defaultValue={bookingData?.resalePrice} readOnly="readOnly" id="price" className="w-full px-4 py-3 rounded-md input input-bordered" />
                             </div>
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="productname" className="block">Buyer Name</label>
-                                <input type="text" {...register("username")} name="username" defaultValue={user?.displayName} readOnly="readOnly" id="username" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                                <input type="text" name="username" defaultValue={user?.displayName} readOnly="readOnly" id="username" className="w-full px-4 py-3 rounded-md input input-bordered" />
                             </div>
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="email" className="block">Email</label>
-                                <input type="text" {...register("email")} name="email" defaultValue={user?.email} readOnly="readOnly" id="email" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                                <input type="text" name="email" defaultValue={user?.email} readOnly="readOnly" id="email" className="w-full px-4 py-3 rounded-md input input-bordered" />
                             </div>
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="loaction" className="block">Loaction</label>
-                                <input type="text" {...register("loaction")} name="loaction" id="loaction" placeholder="Loaction" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                                <input type="text" name="loaction" id="loaction" placeholder="Loaction" className="w-full px-4 py-3 rounded-md input input-bordered" required/>
                             </div>
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="phone" className="block">Phone</label>
-                                <input type="tel" {...register("phone")} name="phone" id="phone" placeholder="Phone number" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                                <input type="tel" name="phone" id="phone" placeholder="Phone number" className="w-full px-4 py-3 rounded-md input input-bordered" required/>
                             </div>
                             <div className="flex justify-center mt-5">
                                 <button type="submit" className="btn btn-primary">Submit</button>
