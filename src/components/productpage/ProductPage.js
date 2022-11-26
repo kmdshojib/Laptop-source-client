@@ -1,16 +1,37 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { GoVerified } from 'react-icons/go';
+
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from './../../context/authcontext';
+
+
 
 const ProductPage = () => {
-    const data = useLoaderData()
-    console.log(data);
+    const { user } = useContext(AuthContext)
+    const [bookingData, setBookingData] = useState(null)
+    const producData = useLoaderData()
+    const { register, handleSubmit } = useForm()
+    const handleBooking = (data) => {
+        console.log(data)
+    }
+
+
+
+    const handleBookingData = (id) => {
+        axios.get(`http://localhost:5000/products/${id}`, {
+            responseType: "json",
+        })
+            .then(res => setBookingData(res.data))
+    }
+
     return (
         <div className="ml-5 mt-5 grid grid-rows gap-5 md:grid-cols-2 lg:grid-cols-3">
             {
-                data?.map(ele => (
+                producData?.map(ele => (
                     <div key={ele._id} className="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src={ele.image} style={{width:"384px", height:"282px",objectFit:"cover"}} alt="Shoes" /></figure>
+                        <figure><img src={ele.image} style={{ width: "384px", height: "282px", objectFit: "cover" }} alt="Shoes" /></figure>
                         <div className="card-body mt-5">
                             <h2 className="card-title ">{ele.laptopName}</h2>
                             <div className='mb-5 mt-5'>
@@ -23,12 +44,53 @@ const ProductPage = () => {
                                 <p className="flex">Seller: {ele.seller} <span className="mt-1 ml-1">{ele?.verified && <GoVerified />}</span></p>
                             </div>
                             <div className="card-actions justify-center">
-                                <button className="btn btn-primary">Buy Now</button>
+                                {
+                                    (user?.email === ele?.email) ? <p className="text-center cursor-pointer text-blue-700 underline">Advertise</p> : <label onClick={() => handleBookingData(ele?._id)} htmlFor="my-modal" className="btn btn-primary" >Buy Now</label>
+                                }
                             </div>
                         </div>
                     </div>
+
+
                 ))
             }
+            <input type="checkbox" id="my-modal" className="modal-toggle" />
+            <label htmlFor="my-modal" className="modal cursor-pointe">
+                <div className="modal-box">
+                    <label htmlFor="my-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <div>
+                        <form onSubmit={handleSubmit(handleBooking)}>
+                            <div className="space-y-1 text-sm">
+                                <label htmlFor="productname" className="block ">Laptop Name</label>
+                                <input type="text" {...register("productname")} name="productname" defaultValue={bookingData?.laptopName} readOnly="readOnly" id="productname" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                            </div>
+                            <div className="space-y-1 text-sm">
+                                <label htmlFor="price" className="block ">Price: $</label>
+                                <input type="text" {...register("price")} name="price" defaultValue={bookingData?.resalePrice} readOnly="readOnly" id="price" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                            </div>
+                            <div className="space-y-1 text-sm">
+                                <label htmlFor="productname" className="block">Buyer Name</label>
+                                <input type="text" {...register("username")} name="username" defaultValue={user?.displayName} readOnly="readOnly" id="username" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                            </div>
+                            <div className="space-y-1 text-sm">
+                                <label htmlFor="email" className="block">Email</label>
+                                <input type="text" {...register("email")} name="email" defaultValue={user?.email} readOnly="readOnly" id="email" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                            </div>
+                            <div className="space-y-1 text-sm">
+                                <label htmlFor="loaction" className="block">Loaction</label>
+                                <input type="text" {...register("loaction")} name="loaction" id="loaction" placeholder="Loaction" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                            </div>
+                            <div className="space-y-1 text-sm">
+                                <label htmlFor="phone" className="block">Phone</label>
+                                <input type="tel" {...register("phone")} name="phone" id="phone" placeholder="Phone number" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                            </div>
+                            <div className="flex justify-center mt-5">
+                                <button type="submit" className="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </label>
         </div>
     );
 }

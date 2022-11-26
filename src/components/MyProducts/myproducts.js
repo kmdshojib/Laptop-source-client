@@ -12,6 +12,7 @@ const MyProducts = () => {
     if (isLoading) return <Spinner />
     if (error) return <p>Something went wrong!</p>
     console.log(data)
+    
     return (
         <div className="ml-5 mt-5 grid grid-rows gap-5 md:grid-cols-2 lg:grid-cols-3">
             {
@@ -29,7 +30,7 @@ const MyProducts = () => {
                                 <p>Purchase Year: {ele.year}</p>
                             </div>
                             <div className="card-actions justify-center">
-                                <button className="btn btn-primary">Buy Now</button>
+                                <p className="text-center cursor-pointer text-blue-700 underline">Advertise</p>
                             </div>
                         </div>
                     </div>
