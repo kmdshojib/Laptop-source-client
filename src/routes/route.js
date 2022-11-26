@@ -11,6 +11,7 @@ import Register from "../components/register/register";
 import Main from "../layout/main";
 import AdminRoute from "./adminroute";
 import ProductPage from './../components/productpage/ProductPage';
+import MyProducts from "../components/MyProducts/myproducts";
 
 export const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
             {
                 path: "/addproduct",
                 element: <AddProduct />
+            },
+            {
+                path: "/myproducts",
+                element: <MyProducts />
             },
             {
                 path: "/admindashboard",

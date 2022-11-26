@@ -42,7 +42,7 @@ const Header = () => {
                         <ul className="menu menu-horizontal p-0">
                             <li><Link to="/">Home</Link></li>
                             {(user && (isSeller || isAdmin)) && <li><Link to="/addproduct">Add Product</Link></li>}
-
+                            {(user && isSeller) && <li><Link to="/myproducts">My Products</Link></li>}
                             {(user && isAdmin) && <li><Link to="/admindashboard">Dashboard</Link></li>}
                             <li><Link to="/blog">Blog</Link></li>
                             {

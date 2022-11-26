@@ -12,7 +12,7 @@ const ProductCategories = () => {
     if (isLoading) return <Spinner />
     if (error) return <p>Something went wrong!</p>
     return (
-        <div className="flex flex-col lg:flex-row justify-around mt-10">
+        <div className="grid grid-rows md:grid-cols-2 lg:grid-cols-3 mt-10">
             {
                 data.map(item => {
                     const category = item.catagoryName.toLowerCase();

@@ -2,8 +2,10 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/authcontext';
+import useTitle from '../../Hooks/useTitle';
 
 const AddProduct = () => {
+    useTitle("Add Product");
     const { user } = useContext(AuthContext)
     const { register, handleSubmit, reset } = useForm()
     const [seller, setSeller] = useState(null)
@@ -18,7 +20,8 @@ const AddProduct = () => {
         const productName = data.productname
         const img = data.productimage
         const category = data.category
-        const price = data.price
+        const oroginalPrice = data.price
+        const resalePrice = data.resaleprice
         const description = data.description
         const condition = data.condition
         const year = data.year
@@ -30,13 +33,15 @@ const AddProduct = () => {
             category: category,
             laptopName: productName,
             image: img,
-            price: price,
+            oroginalPrice: oroginalPrice,
+            resalePrice: resalePrice,
             condition: condition,
             description: description,
             year: year,
             loaction: loaction,
             seller: seller?.name,
-            verified: seller?.verified
+            verified: seller?.verified,
+            email: seller?.email
         }
         axios({
             method: 'post',
@@ -71,8 +76,12 @@ const AddProduct = () => {
                         <input type="text" {...register("productname")} required name="productname" id="productname" placeholder="Laptop Name" className="w-full px-4 py-3 rounded-md input  input-bordered" />
                     </div>
                     <div className="space-y-1 text-sm">
-                        <label htmlFor="price" className="block ">Laptop Price</label>
-                        <input type="number" {...register("price")} required name="price" id="price" placeholder="Price" className="w-full px-4 py-3 rounded-md input  input-bordered" />
+                        <label htmlFor="price" className="block ">Laptop Original Price</label>
+                        <input type="number" {...register("price")} required name="price" id="price" placeholder="Original Price" className="w-full px-4 py-3 rounded-md input  input-bordered" />
+                    </div>
+                    <div className="space-y-1 text-sm">
+                        <label htmlFor="resaleprice" className="block ">Laptop Resale Price</label>
+                        <input type="number" {...register("resaleprice")} required name="resaleprice" id="resaleprice" placeholder="Resale Price" className="w-full px-4 py-3 rounded-md input  input-bordered" />
                     </div>
                     <div className="space-y-1 text-sm">
                         <label htmlFor="productname" className="block ">Laptop Image URL</label>
@@ -80,7 +89,7 @@ const AddProduct = () => {
                     </div>
                     <div className="space-y-1 text-sm">
                         <label htmlFor="year" className="block ">Purchasing Year</label>
-                        <input type="number" {...register("year")} required name="year" id="price" placeholder="Purchasing Year" className="w-full px-4 py-3 rounded-md input  input-bordered" />
+                        <input type="number" {...register("year")} required name="year" id="year" placeholder="Purchasing Year" className="w-full px-4 py-3 rounded-md input  input-bordered" />
                     </div>
                     <div className="space-y-1 text-sm">
                         <label htmlFor="description" className="block ">Laptop Description</label>
