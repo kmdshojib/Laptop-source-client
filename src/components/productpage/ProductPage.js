@@ -1,9 +1,9 @@
 import axios from 'axios';
-import React, { useContext, useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useContext, useState } from 'react';
 import { GoVerified } from 'react-icons/go';
 
 import { useLoaderData } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { AuthContext } from './../../context/authcontext';
 
 
@@ -24,18 +24,18 @@ const ProductPage = () => {
         const loaction = form.loaction.value
         const phone = form.phone.value
 
-        axios({
-            method: 'post',
+        axios.post({
             url: 'http://localhost:5000/orders',
-            data:{
+            data: {
                 productName: productName,
-                productPrice:productPrice,
+                productPrice: productPrice,
                 buyerName: buyerName,
                 buyerEmail: buyerEmail,
                 loaction: loaction,
                 phone: phone
             }
         })
+        toast.success("Laptop booked Successfully")
     }
 
 
@@ -99,11 +99,11 @@ const ProductPage = () => {
                             </div>
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="loaction" className="block">Loaction</label>
-                                <input type="text" name="loaction" id="loaction" placeholder="Loaction" className="w-full px-4 py-3 rounded-md input input-bordered" required/>
+                                <input type="text" name="loaction" id="loaction" placeholder="Loaction" className="w-full px-4 py-3 rounded-md input input-bordered" required />
                             </div>
                             <div className="space-y-1 text-sm">
                                 <label htmlFor="phone" className="block">Phone</label>
-                                <input type="tel" name="phone" id="phone" placeholder="Phone number" className="w-full px-4 py-3 rounded-md input input-bordered" required/>
+                                <input type="tel" name="phone" id="phone" placeholder="Phone number" className="w-full px-4 py-3 rounded-md input input-bordered" required />
                             </div>
                             <div className="flex justify-center mt-5">
                                 <button type="submit" className="btn btn-primary">Submit</button>

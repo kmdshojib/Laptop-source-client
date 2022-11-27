@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext } from 'react';
 
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/authcontext';
@@ -10,7 +10,7 @@ const Header = () => {
     const [isAdmin] = useAdmin(user?.email)
     const [isSeller] = useSeller(user?.email)
     const handleLogOut = () => logOut()
-   console.log(user)
+    console.log(user)
     return (
         <div>
             <div className="navbar bg-base-100">
