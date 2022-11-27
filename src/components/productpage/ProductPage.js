@@ -40,11 +40,15 @@ const ProductPage = () => {
 
 
 
-    const handleBookingData = (id) => {
+    const handleBookingData = (id,event) => {
         axios.get(`http://localhost:5000/products/${id}`, {
             responseType: "json",
         })
             .then(res => setBookingData(res.data))
+        event.target.htmlFor = "my-modal"
+        if(!user){
+            toast.warning("You must login to buy this item")
+        }
     }
 
     return (
@@ -66,7 +70,7 @@ const ProductPage = () => {
                             </div>
                             <div className="card-actions justify-center">
                                 {
-                                    (user?.email === ele?.email) ? <p className="text-center cursor-pointer text-blue-700 underline">Advertise</p> : <label onClick={() => handleBookingData(ele?._id)} htmlFor="my-modal" className="btn btn-primary" >Buy Now</label>
+                                    (user?.email === ele.email) ? <p className="text-center cursor-pointer text-blue-700 underline">Advertise</p> : <label onClick={(event) => handleBookingData(ele?._id,event)}  className="btn btn-primary" >Buy Now</label>
                                 }
                             </div>
                         </div>
@@ -75,43 +79,48 @@ const ProductPage = () => {
 
                 ))
             }
-            <input type="checkbox" id="my-modal" className="modal-toggle" />
-            <label htmlFor="my-modal" className="modal cursor-pointe">
-                <div className="modal-box">
-                    <label htmlFor="my-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <div>
-                        <form onSubmit={handleBooking}>
-                            <div className="space-y-1 text-sm">
-                                <label htmlFor="productname" className="block ">Laptop Name</label>
-                                <input type="text" name="productname" defaultValue={bookingData?.laptopName} readOnly="readOnly" id="productname" className="w-full px-4 py-3 rounded-md input input-bordered" />
+            {
+                (user && user?.uid) &&
+                    <>
+                        <input type="checkbox" id="my-modal" className="modal-toggle" />
+                        <label className="modal cursor-pointe">
+                            <div className="modal-box">
+                                <label htmlFor="my-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                <div>
+                                    <form onSubmit={handleBooking}>
+                                        <div className="space-y-1 text-sm">
+                                            <label htmlFor="productname" className="block ">Laptop Name</label>
+                                            <input type="text" name="productname" defaultValue={bookingData?.laptopName} readOnly="readOnly" id="productname" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                                        </div>
+                                        <div className="space-y-1 text-sm">
+                                            <label htmlFor="price" className="block ">Price: $</label>
+                                            <input type="text" name="price" defaultValue={bookingData?.resalePrice} readOnly="readOnly" id="price" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                                        </div>
+                                        <div className="space-y-1 text-sm">
+                                            <label htmlFor="productname" className="block">Buyer Name</label>
+                                            <input type="text" name="username" defaultValue={user?.displayName} readOnly="readOnly" id="username" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                                        </div>
+                                        <div className="space-y-1 text-sm">
+                                            <label htmlFor="email" className="block">Email</label>
+                                            <input type="text" name="email" defaultValue={user?.email} readOnly="readOnly" id="email" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                                        </div>
+                                        <div className="space-y-1 text-sm">
+                                            <label htmlFor="loaction" className="block">Loaction</label>
+                                            <input type="text" name="loaction" id="loaction" placeholder="Loaction" className="w-full px-4 py-3 rounded-md input input-bordered" required />
+                                        </div>
+                                        <div className="space-y-1 text-sm">
+                                            <label htmlFor="phone" className="block">Phone</label>
+                                            <input type="tel" name="phone" id="phone" placeholder="Phone number" className="w-full px-4 py-3 rounded-md input input-bordered" required />
+                                        </div>
+                                        <div className="flex justify-center mt-5">
+                                            <button type="submit" className="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div className="space-y-1 text-sm">
-                                <label htmlFor="price" className="block ">Price: $</label>
-                                <input type="text" name="price" defaultValue={bookingData?.resalePrice} readOnly="readOnly" id="price" className="w-full px-4 py-3 rounded-md input input-bordered" />
-                            </div>
-                            <div className="space-y-1 text-sm">
-                                <label htmlFor="productname" className="block">Buyer Name</label>
-                                <input type="text" name="username" defaultValue={user?.displayName} readOnly="readOnly" id="username" className="w-full px-4 py-3 rounded-md input input-bordered" />
-                            </div>
-                            <div className="space-y-1 text-sm">
-                                <label htmlFor="email" className="block">Email</label>
-                                <input type="text" name="email" defaultValue={user?.email} readOnly="readOnly" id="email" className="w-full px-4 py-3 rounded-md input input-bordered" />
-                            </div>
-                            <div className="space-y-1 text-sm">
-                                <label htmlFor="loaction" className="block">Loaction</label>
-                                <input type="text" name="loaction" id="loaction" placeholder="Loaction" className="w-full px-4 py-3 rounded-md input input-bordered" required />
-                            </div>
-                            <div className="space-y-1 text-sm">
-                                <label htmlFor="phone" className="block">Phone</label>
-                                <input type="tel" name="phone" id="phone" placeholder="Phone number" className="w-full px-4 py-3 rounded-md input input-bordered" required />
-                            </div>
-                            <div className="flex justify-center mt-5">
-                                <button type="submit" className="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </label>
+                        </label>
+                    </>     
+            }
         </div>
     );
 }

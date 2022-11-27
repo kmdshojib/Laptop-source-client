@@ -2,17 +2,43 @@ import React, { useContext } from 'react';
 import Spinner from '../Spinner/Spinner';
 import { useQuery } from 'react-query';
 import { AuthContext } from '../../context/authcontext';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext)
-    const { isLoading, error, data } = useQuery({
+    const { isLoading, error, data, refetch } = useQuery({
         queryKey: ["myproducts"],
-        queryFn: () => fetch(`http://localhost:5000/myproducts/${user.email}`).then(res => res.json())
+        queryFn: () => fetch(`http://localhost:5000/myproducts/${user?.email}`).then(res => res?.json())
     })
     if (isLoading) return <Spinner />
     if (error) return <p>Something went wrong!</p>
-    console.log(data)
 
+    const handleAdvertisement = (id) => {
+        const advertised = {
+            "advertised": true
+        }
+        fetch(`http://localhost:5000/productCollections/${id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(advertised)
+        })
+            .then(res => res.json())
+            .then(data => {
+                data?.acknowledged && toast.success("Successfully advertised")
+            })
+    }
+    const handleSoldItem = (id) => {
+        console.log(id)
+
+        axios.delete(`http://localhost:5000/products/${id}`)
+            .then(res => {
+                res.status === 200 && toast.success("Mark as sold successfully")
+                refetch()
+            })
+    }
     return (
         <div className="ml-5 mt-5 grid grid-rows gap-5 md:grid-cols-2 lg:grid-cols-3">
             {
@@ -30,7 +56,12 @@ const MyProducts = () => {
                                 <p>Purchase Year: {ele.year}</p>
                             </div>
                             <div className="card-actions justify-center">
-                                <p className="text-center cursor-pointer text-blue-700 underline">Advertise</p>
+                                <div>
+                                    <p className="text-center cursor-pointer text-blue-700 underline" onClick={() => handleAdvertisement(ele._id)}>Advertise</p>
+                                </div>
+                                <div>
+                                    <p className="text-center cursor-pointer text-blue-700 underline" onClick={() => handleSoldItem(ele._id)}>Mark As Sold</p>
+                                </div>
                             </div>
                         </div>
                     </div>
