@@ -13,6 +13,7 @@ import AdminRoute from "./adminroute";
 import ProductPage from './../components/productpage/ProductPage';
 import MyProducts from "../components/MyProducts/myproducts";
 import MyOrders from "../components/MyOrders/myorders";
+import PrivateRoute from "./privateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -51,7 +52,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:"/myorders",
-                element: <MyOrders />
+                element: <PrivateRoute><MyOrders /></PrivateRoute>
             },
             {
                 path: "/admindashboard",

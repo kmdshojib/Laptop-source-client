@@ -12,7 +12,7 @@ const AdminRoute = ({ children }) => {
     
     const location = useLocation()
 
-    if ( isAdminLoading && !loading) {
+    if (loading || isAdminLoading) {
         return <Spinner />
     }
     if (user && isAdmin) {

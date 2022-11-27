@@ -1,6 +1,6 @@
 # Laptop Source - Client
 
-This is a clinet site for an travel guide website called lone traveller.
+This is a clinet site for an Laptop Reasle website called Laptop Source.
 
 # Functions
 - User based role - Seller - Buyer - Admin 

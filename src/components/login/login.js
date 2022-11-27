@@ -1,19 +1,26 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/authcontext';
 import useTitle from '../../Hooks/useTitle';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     useTitle("Sign In")
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { signIn } = useContext(AuthContext)
+     // react router dom 
+     const navigate = useNavigate()
+     const location = useLocation()
+     const from = location.state?.from?.pathname || '/';
+
     const handleLogin = (data) => {
         const email = data.email
         const password = data.password
         signIn(email, password)
             .then(result => {
-                (result?.user && result.user?.uid) && alert("User logged in successfully")
+                (result?.user && result.user?.uid) && toast.success("User logged in successfully")
+                navigate(from, {replace: true});
             })
             .catch(error => console.log(error))
     }
