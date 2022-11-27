@@ -80,7 +80,7 @@ const AllSellers = () => {
                                     <td className="flex">{buyer.name} <span className="mt-1 ml-1">{buyer?.verified && <GoVerified />}</span> </td>
                                     <td>{buyer.email}</td>
                                     <td className="cursor-pointer text-blue-700 hover:underline" onClick={() => handleVerify(buyer.email)}>Verify</td>
-                                    <td className="cursor-pointer text-blue-700 hover:underline" onClick={() => handleDelete(buyer.email)}>Delete</td>
+                                    <td className="cursor-pointer text-red-700 hover:underline" onClick={() => handleDelete(buyer.email)}>Delete</td>
                                 </tr>
                             ))
                         }

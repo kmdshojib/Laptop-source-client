@@ -12,6 +12,7 @@ import Main from "../layout/main";
 import AdminRoute from "./adminroute";
 import ProductPage from './../components/productpage/ProductPage';
 import MyProducts from "../components/MyProducts/myproducts";
+import MyOrders from "../components/MyOrders/myorders";
 
 export const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
             {
                 path: "/myproducts",
                 element: <MyProducts />
+            },
+            {
+                path:"/myorders",
+                element: <MyOrders />
             },
             {
                 path: "/admindashboard",

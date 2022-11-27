@@ -24,18 +24,25 @@ const ProductPage = () => {
         const loaction = form.loaction.value
         const phone = form.phone.value
 
-        axios.post({
-            url: 'http://localhost:5000/orders',
-            data: {
-                productName: productName,
-                productPrice: productPrice,
-                buyerName: buyerName,
-                buyerEmail: buyerEmail,
-                loaction: loaction,
-                phone: phone
-            }
+        const order = {
+            productName: productName,
+            productPrice: productPrice,
+            buyerName: buyerName,
+            buyerEmail: buyerEmail,
+            loaction: loaction,
+            phone: phone
+        }
+
+        fetch("http://localhost:5000/orders",{
+            method:"post",
+            headers:{
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(order)
         })
-        toast.success("Laptop booked Successfully")
+        .then(res => res.json())
+        .then(data => data.acknowledged && toast.success("Laptop booked Successfully"))
+        .catch(err => console.error(err))
     }
 
 
@@ -50,7 +57,9 @@ const ProductPage = () => {
             toast.warning("You must login to buy this item")
         }
     }
-
+    const handleForm = (e) => {
+        e.target.htmlFor ="my-modal"
+    }
     return (
         <div className="ml-5 mt-5 grid grid-rows gap-5 md:grid-cols-2 lg:grid-cols-3">
             {
@@ -113,7 +122,7 @@ const ProductPage = () => {
                                             <input type="tel" name="phone" id="phone" placeholder="Phone number" className="w-full px-4 py-3 rounded-md input input-bordered" required />
                                         </div>
                                         <div className="flex justify-center mt-5">
-                                            <button type="submit" className="btn btn-primary">Submit</button>
+                                            <input onClick={() => handleForm} htmlFor="" type="submit" className="btn btn-primary" value="Submit" />
                                         </div>
                                     </form>
                                 </div>

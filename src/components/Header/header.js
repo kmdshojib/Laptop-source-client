@@ -47,7 +47,10 @@ const Header = () => {
                             <li><Link to="/blog">Blog</Link></li>
                             {
                                 (user && user?.uid) ?
-                                    <li><p onClick={handleLogOut}>Log Out</p></li>
+                                    <>
+                                        <li><Link to="/myorders">My Orders</Link></li>
+                                        <li><p onClick={handleLogOut}>Log Out</p></li>
+                                    </>
                                     :
                                     <>
                                         <li><Link to="/login">Sign In</Link></li>
