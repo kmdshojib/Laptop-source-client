@@ -11,7 +11,7 @@ const Home = () => {
     useTitle("Home")
     const { isLoading, error, data, } = useQuery({
         queryKey: ["products"],
-        queryFn: () => fetch("http://localhost:5000/products")
+        queryFn: () => fetch("https://laptop-source-server-kmdshojib.vercel.app/products")
             .then(res => res.json())
 
     })

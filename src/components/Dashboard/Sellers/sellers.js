@@ -11,7 +11,7 @@ const AllSellers = () => {
     useTitle("Dashboard | All Sellers");
     const { isLoading, error, data, refetch } = useQuery({
         queryKey: ["sellers"],
-        queryFn: () => fetch("http://localhost:5000/users/sellers")
+        queryFn: () => fetch("https://laptop-source-server-kmdshojib.vercel.app/users/sellers")
             .then(res => res.json())
 
     })
@@ -22,7 +22,7 @@ const AllSellers = () => {
         console.log(email)
         const confirm = window.confirm("Are you sure you want to delete")
         if (confirm) {
-            fetch(`http://localhost:5000/user/${email}`, {
+            fetch(`https://laptop-source-server-kmdshojib.vercel.app/user/${email}`, {
                 method: "DELETE",
             })
                 .then(res => res.json())
@@ -39,7 +39,7 @@ const AllSellers = () => {
             "verified": true,
         }
         if (confirm) {
-            fetch(`http://localhost:5000/user/${email}`, {
+            fetch(`https://laptop-source-server-kmdshojib.vercel.app/user/${email}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ const AllSellers = () => {
 
         axios({
             method: 'put',
-            url: `http://localhost:5000/verifcation/${email}`,
+            url: `https://laptop-source-server-kmdshojib.vercel.app/verifcation/${email}`,
             data: verify
         })
     }

@@ -9,7 +9,7 @@ const MyProducts = () => {
     const { user } = useContext(AuthContext)
     const { isLoading, error, data, refetch } = useQuery({
         queryKey: ["myproducts"],
-        queryFn: () => fetch(`http://localhost:5000/myproducts/${user?.email}`).then(res => res?.json())
+        queryFn: () => fetch(`https://laptop-source-server-kmdshojib.vercel.app/myproducts/${user?.email}`).then(res => res?.json())
     })
     if (isLoading) return <Spinner />
     if (error) return <p>Something went wrong!</p>
@@ -18,7 +18,7 @@ const MyProducts = () => {
         const advertised = {
             "advertised": true
         }
-        fetch(`http://localhost:5000/productCollections/${id}`, {
+        fetch(`https://laptop-source-server-kmdshojib.vercel.app/productCollections/${id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ const MyProducts = () => {
     const handleSoldItem = (id) => {
         console.log(id)
 
-        axios.delete(`http://localhost:5000/products/${id}`)
+        axios.delete(`https://laptop-source-server-kmdshojib.vercel.app/products/${id}`)
             .then(res => {
                 res.status === 200 && toast.success("Mark as sold successfully")
                 refetch()

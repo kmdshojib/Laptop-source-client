@@ -14,7 +14,7 @@ const CheckoutForm = ({ Productdata }) => {
     
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://laptop-source-server-kmdshojib.vercel.app/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ productPrice }),
@@ -67,7 +67,7 @@ const CheckoutForm = ({ Productdata }) => {
             return
         }
         if (paymentIntent.status === "succeeded") {
-            fetch(`http://localhost:5000/products/${bookedId}`,{
+            fetch(`https://laptop-source-server-kmdshojib.vercel.app/products/${bookedId}`,{
                 method:"delete",
                 headers:{
                     "content-type": "application/json"
@@ -78,7 +78,7 @@ const CheckoutForm = ({ Productdata }) => {
                 trxId: paymentIntent.id,
                 productId: _id
             }
-            fetch("http://localhost:5000/payments", {
+            fetch("https://laptop-source-server-kmdshojib.vercel.app/payments", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

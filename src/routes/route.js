@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
             {
                 path: "/laptop/:category",
                 element: <ProductPage />,
-                loader: async ({ params }) => fetch(`http://localhost:5000/product/${params.category}`)
+                loader: async ({ params }) => fetch(`https://laptop-source-server-kmdshojib.vercel.app/product/${params.category}`)
             },
             {
                 path: "/addproduct",
@@ -59,7 +59,7 @@ export const router = createBrowserRouter([
             {
                 path: "/payment/:id",
                 element: <PrivateRoute><Payment /></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/payment/${params.id}`)
+                loader: ({ params }) => fetch(`https://laptop-source-server-kmdshojib.vercel.app/payment/${params.id}`)
             },
             {
                 path: "/admindashboard",
@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
                     {
                         path: "/admindashboard/reoprtedissues",
                         element: <ReportedIssue />,
-                        loader: async () => fetch("http://localhost:5000/reports")
+                        loader: async () => fetch("https://laptop-source-server-kmdshojib.vercel.app/reports")
                     }
 
                 ]

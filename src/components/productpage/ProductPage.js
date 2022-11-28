@@ -39,7 +39,7 @@ const ProductPage = () => {
         }
         console.log(order)
 
-        fetch("http://localhost:5000/orders", {
+        fetch("https://laptop-source-server-kmdshojib.vercel.app/orders", {
             method: "post",
             headers: {
                 "content-type": "application/json"
@@ -55,7 +55,7 @@ const ProductPage = () => {
 
 
     const handleBookingData = (id, event) => {
-        axios.get(`http://localhost:5000/products/${id}`, {
+        axios.get(`https://laptop-source-server-kmdshojib.vercel.app/products/${id}`, {
             responseType: "json",
         })
             .then(res => setBookingData(res.data))
@@ -77,7 +77,7 @@ const ProductPage = () => {
                 sellerEmail: reportingItem[0].email,
                 issue: issue,
             }
-            fetch("http://localhost:5000/reports", {
+            fetch("https://laptop-source-server-kmdshojib.vercel.app/reports", {
                 method: "post",
                 headers: {
                     "content-type": "application/json"

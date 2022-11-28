@@ -8,7 +8,7 @@ const AllBuyers = () => {
     useTitle("Dashboard | All Buyers");
     const { isLoading, error, data, refetch } = useQuery({
         queryKey: ["buyers"],
-        queryFn: () => fetch("http://localhost:5000/users/buyers")
+        queryFn: () => fetch("https://laptop-source-server-kmdshojib.vercel.app/users/buyers")
             .then(res => res.json())
 
     })
@@ -19,7 +19,7 @@ const AllBuyers = () => {
         console.log(email)
         const confirm = window.confirm("Are you sure you want to delete")
         if (confirm) {
-            fetch(`http://localhost:5000/user/${email}`, {
+            fetch(`https://laptop-source-server-kmdshojib.vercel.app/user/${email}`, {
                 method: "DELETE",
             })
                 .then(res => res.json())

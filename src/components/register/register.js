@@ -37,7 +37,7 @@ const Register = () => {
             .then(data => {
                 (data?.user && data?.user?.uid) &&
                     // sending user to database
-                    fetch("http://localhost:5000/users", {
+                    fetch("https://laptop-source-server-kmdshojib.vercel.app/users", {
                         headers: {
                             'Content-Type': 'application/json'
                         },

@@ -13,7 +13,7 @@ const MyOrders = () => {
     const { user } = useContext(AuthContext)
     const { isLoading, error, data, refetch } = useQuery({
         queryKey: ["orders"],
-        queryFn: async () => fetch(`http://localhost:5000/myorders/${user?.email}`)
+        queryFn: async () => fetch(`https://laptop-source-server-kmdshojib.vercel.app/myorders/${user?.email}`)
             .then(res => res.json())
 
     })
@@ -25,7 +25,7 @@ const MyOrders = () => {
     console.log(data)
 
     const handleDeleteOrder = (id) =>{
-        axios.delete(`http://localhost:5000/orders/${id}`).then(res => res.status === 200 &&  refetch())
+        axios.delete(`https://laptop-source-server-kmdshojib.vercel.app/orders/${id}`).then(res => res.status === 200 &&  refetch())
        
     }
     return (

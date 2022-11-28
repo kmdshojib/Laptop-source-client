@@ -11,7 +11,7 @@ const AdvertisedLaptop = () => {
     const [bookingData, setBookingData] = useState(null)
     const { isLoading, error, data,  } = useQuery({
         queryKey: ["products"],
-        queryFn: () => fetch("http://localhost:5000/products")
+        queryFn: () => fetch("https://laptop-source-server-kmdshojib.vercel.app/products")
             .then(res => res.json())
 
     })
@@ -43,7 +43,7 @@ const AdvertisedLaptop = () => {
             bookedId: bookingProductId
         }
 
-        fetch("http://localhost:5000/orders", {
+        fetch("https://laptop-source-server-kmdshojib.vercel.app/orders", {
             method: "post",
             headers: {
                 "content-type": "application/json"
@@ -59,7 +59,7 @@ const AdvertisedLaptop = () => {
 
 
     const handleBookingData = (id, event) => {
-        axios.get(`http://localhost:5000/products/${id}`, {
+        axios.get(`https://laptop-source-server-kmdshojib.vercel.app/products/${id}`, {
             responseType: "json",
         })
             .then(res => setBookingData(res.data))

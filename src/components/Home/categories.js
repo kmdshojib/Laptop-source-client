@@ -7,7 +7,7 @@ const ProductCategories = () => {
     const navigate = useNavigate()
     const { isLoading, error, data } = useQuery({
         queryKey: ["category"],
-        queryFn: () => fetch("http://localhost:5000/categories").then(res => res.json())
+        queryFn: () => fetch("https://laptop-source-server-kmdshojib.vercel.app/categories").then(res => res.json())
     })
     if (isLoading) return <Spinner />
     if (error) return <p>Something went wrong!</p>

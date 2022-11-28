@@ -45,7 +45,7 @@ const Login = () => {
                     name: result.displayName,
                     role: "buyer"
                 }
-                fetch("http://localhost:5000/users", {
+                fetch("https://laptop-source-server-kmdshojib.vercel.app/users", {
                     headers: {
                         'Content-Type': 'application/json'
                     },

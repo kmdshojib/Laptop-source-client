@@ -12,7 +12,7 @@ const AddProduct = () => {
     const { register, handleSubmit, reset } = useForm()
     const [seller, setSeller] = useState(null)
     useEffect(() => {
-        fetch(`http://localhost:5000/seller/${user?.email}`)
+        fetch(`https://laptop-source-server-kmdshojib.vercel.app/seller/${user?.email}`)
             .then(res => res.json())
             .then(data => setSeller(data))
             .catch(err => console.log(err))
@@ -47,7 +47,7 @@ const AddProduct = () => {
         }
         axios({
             method: 'post',
-            url: "http://localhost:5000/products",
+            url: "https://laptop-source-server-kmdshojib.vercel.app/products",
             data: product
         })
         toast.success("Laptop added successfully")
