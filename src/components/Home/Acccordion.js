@@ -4,7 +4,7 @@ const Accordion = () => {
     return (
         <section className="mt-10">
             <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
-                <h2 className="text-2xl font-semibold sm:text-4xl">Frequently Asked Questions</h2>
+                <h2 className="text-2xl font-semibold sm:text-4xl text-center">Frequently Asked Questions</h2>
                 <div className="space-y-4 mt-5">
                     <details className="w-full border rounded-lg">
                         <summary className="px-4 py-6 focus:outline-none focus-visible:ring-violet-400">Is there any return Policy?</summary>

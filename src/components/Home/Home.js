@@ -27,9 +27,9 @@ const Home = () => {
             <ProductCategories />
             {
                 advertisedData.length > 0 && <div>
-                <h2 className="text-center text-2xl font-bold mt-5">Advertised Laptop</h2>
-                <AdvertisedLaptop />
-            </div>
+                    <h2 className="text-center text-2xl font-bold mt-5">Advertised Laptop</h2>
+                    <AdvertisedLaptop />
+                </div>
             }
             <Accordion />
         </div>

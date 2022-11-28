@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:5000/payment/${params.id}`)
             },
             {
-                path: "/admindashboard/allsellers",
+                path: "/admindashboard",
                 element: <AdminRoute><DashBoard /></AdminRoute>,
                 children: [
                     {
