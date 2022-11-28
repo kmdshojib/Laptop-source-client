@@ -5,6 +5,7 @@ import ProductCategories from './categories.js';
 import AdvertisedLaptop from '../AdvertisedLaptop/advertisedLaptops.js';
 import { useQuery } from 'react-query';
 import Spinner from './../Spinner/Spinner';
+import Accordion from './Acccordion.js';
 
 const Home = () => {
     useTitle("Home")
@@ -30,6 +31,7 @@ const Home = () => {
                 <AdvertisedLaptop />
             </div>
             }
+            <Accordion />
         </div>
     );
 }

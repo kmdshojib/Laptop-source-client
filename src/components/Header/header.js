@@ -21,7 +21,7 @@ const Header = () => {
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             <li><Link to="/">Home</Link></li>
-                            {(user && isAdmin) && <li><Link to="/admindashboard">Dashboard</Link></li>}
+                            {(user && isAdmin) && <li><Link to="/admindashboard/allsellers">Dashboard</Link></li>}
                             <li><Link to="/blog">Blog</Link></li>
                             {
                                 (user && user?.uid) ?
@@ -43,7 +43,7 @@ const Header = () => {
                             <li><Link to="/">Home</Link></li>
                             {(user && (isSeller || isAdmin)) && <li><Link to="/addproduct">Add Product</Link></li>}
                             {(user && isSeller) && <li><Link to="/myproducts">My Products</Link></li>}
-                            {(user && isAdmin) && <li><Link to="/admindashboard">Dashboard</Link></li>}
+                            {(user && isAdmin) && <li><Link to="/admindashboard/allsellers">Dashboard</Link></li>}
                             <li><Link to="/blog">Blog</Link></li>
                             {
                                 (user && user?.uid) ?
