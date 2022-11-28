@@ -23,10 +23,12 @@ const ProductPage = () => {
         const buyerEmail = form.email.value
         const loaction = form.loaction.value
         const phone = form.phone.value
+        const originalPrice = form.original.value
 
         const order = {
             productName: productName,
             productPrice: productPrice,
+            originalPrice:originalPrice,
             buyerName: buyerName,
             buyerEmail: buyerEmail,
             loaction: loaction,
@@ -102,8 +104,12 @@ const ProductPage = () => {
                                             <input type="text" name="productname" defaultValue={bookingData?.laptopName} readOnly="readOnly" id="productname" className="w-full px-4 py-3 rounded-md input input-bordered" />
                                         </div>
                                         <div className="space-y-1 text-sm">
-                                            <label htmlFor="price" className="block ">Price: $</label>
+                                            <label htmlFor="price" className="block ">Resale Price: $</label>
                                             <input type="text" name="price" defaultValue={bookingData?.resalePrice} readOnly="readOnly" id="price" className="w-full px-4 py-3 rounded-md input input-bordered" />
+                                        </div>
+                                        <div className="space-y-1 text-sm">
+                                            <label htmlFor="original" className="block ">Original Price: $</label>
+                                            <input type="text" name="original" defaultValue={bookingData?.oroginalPrice} readOnly="readOnly" id="original" className="w-full px-4 py-3 rounded-md input input-bordered" />
                                         </div>
                                         <div className="space-y-1 text-sm">
                                             <label htmlFor="productname" className="block">Buyer Name</label>

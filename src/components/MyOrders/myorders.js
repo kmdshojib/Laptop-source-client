@@ -1,13 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/authcontext';
+import useTitle from '../../Hooks/useTitle';
 import Spinner from './../Spinner/Spinner';
 
 
 
 const MyOrders = () => {
+    useTitle("My Orders");
     const { user } = useContext(AuthContext)
-  
     const { isLoading, error, data, refetch } = useQuery({
         queryKey: ["orders"],
         queryFn: async () => fetch(`http://localhost:5000/myorders/${user?.email}`)
@@ -38,10 +40,10 @@ const MyOrders = () => {
                     <tbody>
                         {
                             data.map(item => (
-                                <tr>
+                                <tr className="hover">
                                     <td>{item.productName}</td>
                                     <td>{item.productPrice}</td>
-                                    <td className="cursor-pointer text-blue-700 hover:underline">Pay</td>
+                                    <td className="cursor-pointer text-blue-700 hover:underline"><Link to={`/payment/${item._id}`}>Pay</Link></td>
                                     <td className="cursor-pointer text-red-700 hover:underline">Delete</td>
                                 </tr>
                             ))

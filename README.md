@@ -17,7 +17,7 @@ This is a clinet site for an Laptop Reasle website called Laptop Source.
 
 # Admin
 - Email: admin@admin.com
-- PassWord: admin@admin.com
+- PassWord: 1234567890
 
 
 

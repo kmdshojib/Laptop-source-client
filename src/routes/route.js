@@ -14,6 +14,7 @@ import ProductPage from './../components/productpage/ProductPage';
 import MyProducts from "../components/MyProducts/myproducts";
 import MyOrders from "../components/MyOrders/myorders";
 import PrivateRoute from "./privateRoute";
+import Payment from "../components/Payment/Payemnt";
 
 export const router = createBrowserRouter([
     {
@@ -53,6 +54,11 @@ export const router = createBrowserRouter([
             {
                 path:"/myorders",
                 element: <PrivateRoute><MyOrders /></PrivateRoute>
+            },
+            {
+                path:"/payment/:id",
+                element: <PrivateRoute><Payment /></PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/payment/${params.id}`)
             },
             {
                 path: "/admindashboard",
