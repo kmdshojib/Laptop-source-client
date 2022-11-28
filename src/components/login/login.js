@@ -31,6 +31,7 @@ const Login = () => {
                 (result?.user && result.user?.uid) && toast.success("User logged in successfully")
                 console.log(result.user.email)
                 setLoginUserEmail(email)
+                navigate(from, { replace: true });
             })
             .catch(error => console.log(error))
 

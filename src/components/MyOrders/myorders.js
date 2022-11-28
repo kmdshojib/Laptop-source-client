@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
@@ -23,7 +24,10 @@ const MyOrders = () => {
     if (error) return <p>Something went wrong!</p>
     console.log(data)
 
-
+    const handleDeleteOrder = (id) =>{
+        axios.delete(`http://localhost:5000/orders/${id}`).then(res => res.status === 200 &&  refetch())
+       
+    }
     return (
         <div className='ml-20 mt-10 mb-10 max-w-screen-xl'>
             <div className="overflow-x-auto">
@@ -44,7 +48,7 @@ const MyOrders = () => {
                                     <td>{item.productName}</td>
                                     <td>{item.productPrice}</td>
                                     <td>{item?.paid ? <p className="text-inherit">Paid</p> : <Link className="cursor-pointer text-blue-700 hover:underline" to={`/payment/${item._id}`}>Pay</Link>}</td>
-                                    <td className="cursor-pointer text-red-700 hover:underline">Delete</td>
+                                    <td onClick={() => handleDeleteOrder(item._id)} className="cursor-pointer text-red-700 hover:underline">Delete</td>
                                 </tr>
                             ))
                         }
