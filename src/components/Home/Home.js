@@ -16,7 +16,9 @@ const Home = () => {
     })
     if (isLoading) return <Spinner />
     if (error) return <p>Something went wrong!</p>
+
     const advertisedData = data.filter(advertised => advertised.advertised === true)
+
     return (
         <div>
             <Banner />

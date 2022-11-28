@@ -40,10 +40,10 @@ const MyOrders = () => {
                     <tbody>
                         {
                             data.map(item => (
-                                <tr className="hover">
+                                <tr key={item._id} className="hover">
                                     <td>{item.productName}</td>
                                     <td>{item.productPrice}</td>
-                                    <td className="cursor-pointer text-blue-700 hover:underline"><Link to={`/payment/${item._id}`}>Pay</Link></td>
+                                    <td>{item?.paid ? <p className="text-inherit">Paid</p> : <Link className="cursor-pointer text-blue-700 hover:underline" to={`/payment/${item._id}`}>Pay</Link>}</td>
                                     <td className="cursor-pointer text-red-700 hover:underline">Delete</td>
                                 </tr>
                             ))

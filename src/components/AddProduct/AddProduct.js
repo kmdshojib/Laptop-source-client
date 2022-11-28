@@ -4,14 +4,13 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../context/authcontext';
 import useTitle from '../../Hooks/useTitle';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+
 
 const AddProduct = () => {
     useTitle("Add Product");
     const { user } = useContext(AuthContext)
     const { register, handleSubmit, reset } = useForm()
     const [seller, setSeller] = useState(null)
-    const navigate = useNavigate()
     useEffect(() => {
         fetch(`http://localhost:5000/seller/${user?.email}`)
             .then(res => res.json())
@@ -53,7 +52,6 @@ const AddProduct = () => {
         })
         toast.success("Laptop added successfully")
         reset()
-        navigate('/myproducts')
     }
     return (
         <div className="flex justify-center mt-10 mb-10">
