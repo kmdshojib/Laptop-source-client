@@ -15,6 +15,7 @@ import MyProducts from "../components/MyProducts/myproducts";
 import MyOrders from "../components/MyOrders/myorders";
 import PrivateRoute from "./privateRoute";
 import Payment from "../components/Payment/Payemnt";
+import ReportedIssue from "../components/Dashboard/ReportedItem/ReportedIssue";
 
 export const router = createBrowserRouter([
     {
@@ -34,14 +35,14 @@ export const router = createBrowserRouter([
                 element: <Register />
             },
             {
-                path:"/blog",
+                path: "/blog",
                 element: <Blog />
 
             },
             {
-                path:"/laptop/:category",
+                path: "/laptop/:category",
                 element: <ProductPage />,
-                loader: async ({params}) => fetch(`http://localhost:5000/product/${params.category}`)
+                loader: async ({ params }) => fetch(`http://localhost:5000/product/${params.category}`)
             },
             {
                 path: "/addproduct",
@@ -52,32 +53,37 @@ export const router = createBrowserRouter([
                 element: <MyProducts />
             },
             {
-                path:"/myorders",
+                path: "/myorders",
                 element: <PrivateRoute><MyOrders /></PrivateRoute>
             },
             {
-                path:"/payment/:id",
+                path: "/payment/:id",
                 element: <PrivateRoute><Payment /></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/payment/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/payment/${params.id}`)
             },
             {
                 path: "/admindashboard",
                 element: <AdminRoute><DashBoard /></AdminRoute>,
-                children:[
+                children: [
                     {
-                        path:"/admindashboard/allbuyers",
+                        path: "/admindashboard/allbuyers",
                         element: <AllBuyers />
                     },
-                    
+
                     {
-                        path:"/admindashboard/allsellers",
+                        path: "/admindashboard/allsellers",
                         element: <AllSellers />
                     },
+                    {
+                        path: "/admindashboard/reoprtedissues",
+                        element: <ReportedIssue />,
+                        loader: async () => fetch("http://localhost:5000/reports")
+                    }
 
                 ]
             },
             {
-                path:"*",
+                path: "*",
                 element: <NotFound />
             }
 
