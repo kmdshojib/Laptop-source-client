@@ -15,7 +15,7 @@ const Accordion = () => {
                         <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-400">yes, Definitely you can trust us! </p>
                     </details>
                     <details className="w-full border rounded-lg">
-                        <summary className="px-4 py-6 focus:outline-none focus-visible:ring-violet-400">an I see before buying?</summary>
+                        <summary className="px-4 py-6 focus:outline-none focus-visible:ring-violet-400">Can I see before buying?</summary>
                         <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-400">Yes, Definitely you can see before buying.</p>
                     </details>
                 </div>

@@ -4,6 +4,8 @@ This is a clinet site for an Laptop Reasle website called Laptop Source.
 
 # Functions
 - User based role - Seller - Buyer - Admin 
+- Payment - System for buyer
+- seller can add a product
 
 - CRUD Operation
 
