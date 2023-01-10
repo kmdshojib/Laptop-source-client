@@ -6,7 +6,7 @@ const Banner = () => {
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <img alt="" src="https://www.digitaltrends.com/wp-content/uploads/2021/11/macbook-pro-2021-16.jpg" className="max-w-sm rounded-lg shadow-2xl" />
                 <div>
-                    <h1 className="text-5xl font-bold mb-2">
+                    <h1 className="text-5xl font-bold mb-2 font-mono">
                         <Typewriter
                             options={{
                                 strings: ['Sell Your laptop right here!', 'Buye your best Laptop from here!'],
