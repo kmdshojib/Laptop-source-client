@@ -35,7 +35,7 @@ const Header = () => {
                             }
                         </ul>
                     </div>
-                    <Link to="/" className="btn btn-ghost normal-case text-xl">Laptop Source</Link>
+                    <Link to="/" className="btn btn-ghost normal-case text-2xl ml-5 font-bold font-mono ">Laptop Source</Link>
                 </div>
 
                 <div className="navbar-end mr-5">
