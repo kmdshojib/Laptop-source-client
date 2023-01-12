@@ -1,15 +1,17 @@
 import React from 'react';
 import Typewriter from 'typewriter-effect';
+
+import "./homebanner.css"
 const Banner = () => {
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <div className="hero min-h-screen homebg">
             <div className="hero-content flex-col lg:flex-row-reverse">
 
                 <div>
-                    <h1 className="text-5xl font-bold mb-2 font-mono">
+                    <h1 className="text-4xl font-bold mb-2 font-mono">
                         <Typewriter
                             options={{
-                                strings: ['Sell Your laptop right here!', 'Buye your best Laptop from here!'],
+                                strings: ['Sell Your Laptop right here!', 'Buye your best Laptop from here!'],
                                 autoStart: true,
                                 loop: true,
                             }}
