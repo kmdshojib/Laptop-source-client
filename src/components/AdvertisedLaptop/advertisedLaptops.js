@@ -5,10 +5,12 @@ import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/authcontext';
 import Spinner from './../Spinner/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 const AdvertisedLaptop = () => {
     const { user } = useContext(AuthContext)
     const [bookingData, setBookingData] = useState(null)
+    const navigate = useNavigate()
     const { isLoading, error, data,  } = useQuery({
         queryKey: ["products"],
         queryFn: () => fetch("https://laptop-source-server-kmdshojib.vercel.app/products")
@@ -65,6 +67,7 @@ const AdvertisedLaptop = () => {
             .then(res => setBookingData(res.data))
         event.target.htmlFor = "my-modal"
         if (!user) {
+            navigate("/login")
             toast.warning("You must login to buy this item")
         }
        

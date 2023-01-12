@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { GoVerified } from 'react-icons/go';
 
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from './../../context/authcontext';
 
@@ -13,6 +13,8 @@ const ProductPage = () => {
     const { user } = useContext(AuthContext)
     const [bookingData, setBookingData] = useState(null)
     const producData = useLoaderData()
+
+    const navigate = useNavigate()
 
     const handleBooking = (id, e) => {
         e.preventDefault()
@@ -61,6 +63,7 @@ const ProductPage = () => {
             .then(res => setBookingData(res.data))
         event.target.htmlFor = "my-modal"
         if (!user) {
+            navigate("/login")
             toast.warning("You must login to buy this item")
         }
 
