@@ -8,18 +8,22 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
+import store from './app/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const queryClient = new QueryClient()
 
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <UserContext>
-        <App />
-        <ToastContainer />
-      </UserContext>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <UserContext>
+          <App />
+          <ToastContainer />
+        </UserContext>
+      </QueryClientProvider>
+    </Provider>
   </React.StrictMode>
 );
 
